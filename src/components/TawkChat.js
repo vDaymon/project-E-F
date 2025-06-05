@@ -1,40 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-// Solo necesitas el PROPERTY_ID de Tawk.to
-const PROPERTY_ID = '6841f00ddbadee190ffc15aa'; // Reemplázalo con el tuyo real
-
 const TawkChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    let tawkLoaded = false;
     if (!window.Tawk_API) {
       const s1 = document.createElement('script');
       s1.async = true;
-      s1.src = `https://embed.tawk.to/${PROPERTY_ID}/default`;
+      s1.src = 'https://embed.tawk.to/6841f4f69ed8c2190a6d3ac5/1it0q9ojl';
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
       document.body.appendChild(s1);
+
       s1.onload = () => {
-        const waitForTawk = setInterval(() => {
+        const wait = setInterval(() => {
           if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
-            if (!tawkLoaded) {
-              window.Tawk_API.hideWidget();
-              setIsReady(true);
-              tawkLoaded = true;
-            }
-            clearInterval(waitForTawk);
+            window.Tawk_API.hideWidget(); // Opcional: ocultar al inicio
+            setIsReady(true);
+            clearInterval(wait);
           }
         }, 200);
       };
-    } else if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
+    } else {
       setIsReady(true);
     }
   }, []);
 
   const handleToggle = () => {
-    if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
+    if (window.Tawk_API) {
       if (isOpen) {
         window.Tawk_API.hideWidget();
       } else {
