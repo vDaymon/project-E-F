@@ -1,70 +1,89 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ProjectCard from './ProjectCard';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations/translations';
 import ProjectDetail from './ProjectDetail';
-import projectsData from '../mock/projects';
 
 const Projects = ({ setActiveSection }) => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const projects = [
+    {
+      id: 1,
+      title: t.customHomeLaCeja,
+      description: t.customHomeLaCejaDesc,
+      image: "/imgs/project1.jpg"
+    },
+    {
+      id: 2,
+      title: t.customHomeElRetiro,
+      description: t.customHomeElRetiroDesc,
+      image: "/imgs/project2.jpg"
+    },
+    {
+      id: 3,
+      title: t.nespressoOffice,
+      description: t.nespressoOfficeDesc,
+      image: "/imgs/project3.jpg"
+    },
+    {
+      id: 4,
+      title: t.servidCenter,
+      description: t.servidCenterDesc,
+      image: "/imgs/project4.jpg"
+    }
+  ];
 
   return (
     <section 
       id="proyectos"
-      className="py-20 bg-gray-50"
-      onMouseEnter={() => setActiveSection('proyectos')}
+      className="py-16 bg-white"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <motion.div
-          className="text-center mb-12"
+          className="mb-12"
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nuestros Proyectos</h2>
-          <div className="w-20 h-1 bg-blue-900 mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">Descubre nuestra cartera de proyectos arquitectónicos y de construcción</p>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.ourWorkTitle}</h2>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {projectsData.map((project, idx) => (
+          {projects.map((project, idx) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 + idx * 0.1 }}
               viewport={{ once: true }}
+              className="cursor-pointer group"
+              onClick={() => setSelectedProject(project)}
             >
-              <ProjectCard 
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
+              <div className="mb-4">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-64 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-900 transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {project.description}
+              </p>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <button
-            className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            onClick={() => setSelectedProject(projectsData[0])}
-          >
-            Ver todos los proyectos
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </button>
         </motion.div>
       </div>
 

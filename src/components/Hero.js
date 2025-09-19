@@ -1,66 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations/translations';
 
-const Hero = ({ setActiveSection }) => {
+const Hero = ({ 
+  setActiveSection, 
+  imageSrc = "/imgs/fondohome.jpg", 
+  title,
+  description,
+  buttonText,
+  buttonAction = () => setActiveSection('proyectos'),
+  showScrollArrow = true,
+  sectionId = "inicio"
+}) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  
+  const heroTitle = title || t.heroTitle;
+  const heroDescription = description || t.heroDescription;
+  const heroButtonText = buttonText || t.viewProjects;
   return (
     <section 
-      id="inicio"
+      id={sectionId}
       className="relative h-screen bg-gradient-to-br from-gray-900 to-gray-800"
-      onMouseEnter={() => setActiveSection('inicio')}
     >
-      {/* Espacio reservado para video - INICIO (Reemplazar este bloque cuando tengas el video) */}
+      {/* Imagen de fondo con opacidad */}
       <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src="https://v.ftcdn.net/03/75/22/89/700_F_375228961_dzocUiSBesas6fQfafTR7Uw5IzmhpPOI_ST.mp4" type="video/mp4" />
-        </video>
+        <img 
+          src={imageSrc} 
+          alt={title}
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+        />
       </div>
-      {/* Espacio reservado para video - FIN */}
 
       {/* Overlay de contenido */}
-      <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center px-4">
-        {/* Logo/Título */}
+      <div className="absolute inset-0 bg-black/30 flex flex-col items-start justify-center px-14">
+        {/* Título principal */}
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl"
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          E&F <span className="text-blue-900"></span>
+          {heroTitle}
         </motion.h1>
         
-        {/* Subtítulo */}
+        {/* Descripción */}
         <motion.p
-          className="text-lg md:text-xl text-white/90 max-w-2xl mb-8 animate-fade-in animation-delay-100"
+          className="text-lg md:text-xl text-white/90 max-w-3xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Construyendo sueños, creando realidades
+          {heroDescription}
         </motion.p>
         
-        {/* CTA Principal */}
-        <motion.button
-          onClick={() => setActiveSection('proyectos')}
-          className="bg-blue-900 hover:bg-blue-950 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg animate-fade-in animation-delay-200"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Ver Nuestros Proyectos
-        </motion.button>
-        
         {/* Flecha indicadora de scroll */}
-        <div className="absolute bottom-8 animate-bounce">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
+        {showScrollArrow && (
+          <div className="absolute bottom-8 animate-bounce">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+        )}
       </div>
     </section>
   );
