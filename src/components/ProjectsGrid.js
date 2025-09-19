@@ -23,11 +23,16 @@ const ProjectsGrid = ({ projects, initialCount = 3 }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {visibleProjects.map((project, index) => (
             <div key={project.id || index} className="group cursor-pointer">
-              <div className="mb-4 overflow-hidden rounded-lg">
+              <div className="mb-4 overflow-hidden rounded-lg h-64 bg-gray-200">
                 <OptimizedImage 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  style={{ 
+                    objectPosition: 'center',
+                    minHeight: '100%',
+                    minWidth: '100%'
+                  }}
                 />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">

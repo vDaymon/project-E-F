@@ -11,53 +11,46 @@ const useOptimizedImage = (originalSrc) => {
     
     // Verificar si el navegador soporta WebP
     const supportsWebP = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 1;
-      canvas.height = 1;
-      return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1;
+        canvas.height = 1;
+        return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+      } catch (e) {
+        return false;
+      }
     };
 
-    // Función para probar si la imagen optimizada existe
-    const testImage = (src) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = src;
-      });
-    };
-
-    const loadOptimizedImage = async () => {
+    const loadImage = async () => {
       setIsLoading(true);
       setHasError(false);
 
       try {
-        // Si el navegador soporta WebP, intentar cargar la versión optimizada
+        // Primero intentar cargar la imagen optimizada si el navegador soporta WebP
         if (supportsWebP()) {
-          const optimizedExists = await testImage(optimizedSrc);
-          if (optimizedExists) {
-            setImageSrc(optimizedSrc);
-            setIsLoading(false);
-            return;
+          try {
+            const response = await fetch(optimizedSrc, { method: 'HEAD' });
+            if (response.ok) {
+              setImageSrc(optimizedSrc);
+              setIsLoading(false);
+              return;
+            }
+          } catch (e) {
+            // Si falla, continuar con la original
           }
         }
 
-        // Si no hay versión optimizada o no se soporta WebP, usar la original
-        const originalExists = await testImage(originalSrc);
-        if (originalExists) {
-          setImageSrc(originalSrc);
-        } else {
-          setHasError(true);
-        }
+        // Usar la imagen original como fallback
+        setImageSrc(originalSrc);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error loading image:', error);
         setHasError(true);
-      } finally {
         setIsLoading(false);
       }
     };
 
-    loadOptimizedImage();
+    loadImage();
   }, [originalSrc]);
 
   return { imageSrc, isLoading, hasError };
