@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const LegacyBuildOnTrust = () => {
   const { language } = useLanguage();
@@ -22,7 +23,7 @@ const LegacyBuildOnTrust = () => {
           
           {/* Right Column - Image */}
           <div className="order-first lg:order-last">
-            <img 
+            <OptimizedImage 
               src="/imgs/team.jpg" 
               alt="EYF Constructores team"
               className="w-full h-96 object-cover rounded-lg shadow-lg"

@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 
 const ConstructionImages = () => {
   return (
@@ -7,7 +8,7 @@ const ConstructionImages = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Image - Residential Construction */}
           <div className="relative">
-            <img 
+            <OptimizedImage 
               src="/imgs/casaconstruccion.jpg" 
               alt="Residential building under construction with workers"
               className="w-full h-96 object-cover rounded-lg shadow-lg"
@@ -16,7 +17,7 @@ const ConstructionImages = () => {
           
           {/* Right Image - Commercial Construction */}
           <div className="relative">
-            <img 
+            <OptimizedImage 
               src="/imgs/construccionteam.jpg" 
               alt="Multi-story commercial building under construction"
               className="w-full h-96 object-cover rounded-lg shadow-lg"

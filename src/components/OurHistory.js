@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const OurHistory = () => {
   const { language } = useLanguage();
@@ -60,7 +61,7 @@ const OurHistory = () => {
               {historyItems.map((item, index) => (
                 <div key={index} className="w-full flex-shrink-0">
                   <div className="text-center">
-                    <img 
+                    <OptimizedImage 
                       src={item.image} 
                       alt={`${item.year} - ${item.title}`}
                       className="w-full h-64 object-cover rounded-lg mb-4"

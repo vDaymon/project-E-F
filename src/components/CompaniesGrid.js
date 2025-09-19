@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const CompaniesGrid = ({ setActiveSection }) => {
   const { language } = useLanguage();
@@ -50,7 +51,7 @@ const CompaniesGrid = ({ setActiveSection }) => {
               className="group"
             >
               <div className="bg-gray-50 rounded-lg p-8 h-32 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
-                <img 
+                <OptimizedImage 
                   src={company.logo} 
                   alt={`${company.name} logo`}
                   className="max-h-16 max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"

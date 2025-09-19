@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const OurTeam = ({ setActiveSection }) => {
   const { language } = useLanguage();
@@ -52,7 +53,7 @@ const OurTeam = ({ setActiveSection }) => {
             <div className="flex flex-col lg:flex-row items-center gap-8">
               <div className="w-full lg:w-1/3">
                 <div className="aspect-square bg-gray-300 rounded-xl overflow-hidden">
-                  <img 
+                  <OptimizedImage 
                     src={executiveLeadership.image} 
                     alt={executiveLeadership.name}
                     className="w-full h-full object-cover"
@@ -91,7 +92,7 @@ const OurTeam = ({ setActiveSection }) => {
               >
                 <div className="bg-gray-50 rounded-xl p-6 text-center hover:bg-gray-100 transition-colors duration-300">
                   <div className="aspect-square bg-gray-300 rounded-lg overflow-hidden mb-4">
-                    <img 
+                    <OptimizedImage 
                       src={member.image} 
                       alt={member.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

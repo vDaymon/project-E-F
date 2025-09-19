@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const ProjectsGrid = ({ projects, initialCount = 3 }) => {
   const { language } = useLanguage();
@@ -23,7 +24,7 @@ const ProjectsGrid = ({ projects, initialCount = 3 }) => {
           {visibleProjects.map((project, index) => (
             <div key={project.id || index} className="group cursor-pointer">
               <div className="mb-4 overflow-hidden rounded-lg">
-                <img 
+                <OptimizedImage 
                   src={project.image} 
                   alt={project.title}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"

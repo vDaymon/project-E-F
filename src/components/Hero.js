@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import OptimizedImage from './OptimizedImage';
 
 const Hero = ({ 
   setActiveSection, 
@@ -26,7 +27,7 @@ const Hero = ({
     >
       {/* Imagen de fondo con opacidad */}
       <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-        <img 
+        <OptimizedImage 
           src={imageSrc} 
           alt={title}
           className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
