@@ -20,6 +20,9 @@ const Hero = ({
   const heroTitle = title || t.heroTitle;
   const heroDescription = description || t.heroDescription;
   const heroButtonText = buttonText || t.viewProjects;
+  
+  // Debug para ver qué imageSrc está recibiendo
+  console.log('Hero - imageSrc received:', imageSrc);
   return (
     <section 
       id={sectionId}

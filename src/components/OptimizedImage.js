@@ -12,6 +12,12 @@ const OptimizedImage = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    // Verificar que src no sea null o undefined
+    if (!src) {
+      console.log('OptimizedImage - src is null or undefined');
+      return;
+    }
+
     // Crear la ruta optimizada (WebP)
     const optimizedSrc = src.replace('/imgs/', '/imgs/optimized/').replace(/\.(jpg|jpeg|png)$/i, '.webp');
     
@@ -25,24 +31,17 @@ const OptimizedImage = ({
           canvas.height = 1;
           const dataURL = canvas.toDataURL('image/webp');
           if (dataURL.indexOf('data:image/webp') === 0) {
-            console.log('Canvas WebP test passed');
             resolve(true);
             return;
           }
         } catch (e) {
-          console.log('Canvas WebP test failed:', e);
+          // Canvas falló, continuar con imagen real
         }
 
         // Si canvas falla, probar con una imagen real
         const webpImage = new Image();
-        webpImage.onload = () => {
-          console.log('Image WebP test passed');
-          resolve(true);
-        };
-        webpImage.onerror = () => {
-          console.log('Image WebP test failed');
-          resolve(false);
-        };
+        webpImage.onload = () => resolve(true);
+        webpImage.onerror = () => resolve(false);
         // Usar una imagen WebP real que sabemos que existe
         webpImage.src = '/imgs/optimized/fondohome.webp';
       });
@@ -59,27 +58,15 @@ const OptimizedImage = ({
     };
 
     const loadOptimizedImage = async () => {
-      // Detectar Safari específicamente
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-      console.log('Browser detected:', navigator.userAgent);
-      console.log('Is Safari:', isSafari);
-      
       const webpSupported = await supportsWebP();
-      console.log('WebP support check result:', webpSupported);
       
       // Si el navegador soporta WebP, intentar cargar la versión optimizada
       if (webpSupported) {
-        console.log('Browser supports WebP, checking optimized image:', optimizedSrc);
         const exists = await checkImageExists(optimizedSrc);
         if (exists) {
-          console.log('Using optimized WebP image:', optimizedSrc);
           setImageSrc(optimizedSrc);
           return;
-        } else {
-          console.log('Optimized image not found, using original:', src);
         }
-      } else {
-        console.log('Browser does not support WebP, using original:', src);
       }
       
       // Si no soporta WebP o no existe la optimizada, usar la original
@@ -92,6 +79,11 @@ const OptimizedImage = ({
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
+  // Si no hay src, no renderizar nada
+  if (!src) {
+    return null;
+  }
 
   return (
     <LazyLoadImage

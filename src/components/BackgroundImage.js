@@ -10,9 +10,22 @@ const BackgroundImage = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    // Verificar que src no sea null o undefined
+    if (!src) {
+      console.log('BackgroundImage - src is null or undefined');
+      return;
+    }
+
     // Crear la ruta optimizada (WebP)
     const optimizedSrc = src.replace('/imgs/', '/imgs/optimized/').replace(/\.(jpg|jpeg|png)$/i, '.webp');
-    
+
+    // Debug específico para team.jpg
+    if (src.includes('team.jpg')) {
+      console.log('BackgroundImage - team.jpg detected');
+      console.log('Original src:', src);
+      console.log('Optimized src:', optimizedSrc);
+    }
+
     // Verificar si el navegador soporta WebP
     const supportsWebP = () => {
       try {
@@ -26,36 +39,41 @@ const BackgroundImage = ({
       }
     };
 
-    // Función para verificar si la imagen existe
-    const checkImageExists = (url) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    };
-
-    const loadOptimizedImage = async () => {
-      // Si el navegador soporta WebP, intentar cargar la versión optimizada
-      if (supportsWebP()) {
-        const exists = await checkImageExists(optimizedSrc);
-        if (exists) {
-          setImageSrc(optimizedSrc);
-          return;
-        }
-      }
-      
-      // Si no soporta WebP o no existe la optimizada, usar la original
+    // Para team.jpg, usar siempre la original por ahora
+    if (src.includes('team.jpg')) {
+      console.log('Using original team.jpg (bypassing optimization)');
       setImageSrc(src);
-    };
-
-    loadOptimizedImage();
+    } else {
+      // Cargar imagen optimizada si el navegador la soporta
+      if (supportsWebP()) {
+        setImageSrc(optimizedSrc);
+      } else {
+        setImageSrc(src);
+      }
+    }
   }, [src]);
 
   const handleImageLoad = () => {
+    if (src.includes('team.jpg')) {
+      console.log('Team image loaded successfully:', imageSrc);
+    }
     setImageLoaded(true);
   };
+
+  const handleImageError = () => {
+    if (src.includes('team.jpg')) {
+      console.log('Team image error, falling back to original');
+    }
+    // Si falla la optimizada, usar la original
+    if (imageSrc !== src) {
+      setImageSrc(src);
+    }
+  };
+
+  // Si no hay src, no renderizar nada
+  if (!src) {
+    return null;
+  }
 
   return (
     <img
@@ -63,6 +81,7 @@ const BackgroundImage = ({
       alt={alt}
       className={`${className} ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
       onLoad={handleImageLoad}
+      onError={handleImageError}
       {...props}
     />
   );

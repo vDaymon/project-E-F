@@ -10,17 +10,17 @@ const OurTeam = ({ setActiveSection }) => {
   const executiveLeadership = {
     name: "Frank López",
     role: "CEO",
-    image: "/imgs/team/frank-lopez.jpg",
+    image: null, // Imagen no disponible
     description: t.ceoDescription
   };
 
   const teamMembers = [
-    { id: 1, name: "Nancy Rodríguez", role: t.directorOfAdministration, image: "/imgs/team/nancy-rodriguez.jpg" },
-    { id: 2, name: "Johann López", role: t.directorOfOperations, image: "/imgs/team/johann-lopez.jpg" },
-    { id: 3, name: "Daniela López", role: t.designer, image: "/imgs/team/daniela-lopez.jpg" },
-    { id: 4, name: "Claudia Ortiz", role: t.accountingPartner, image: "/imgs/team/claudia-ortiz.jpg" },
-    { id: 5, name: "Victor Chavez", role: t.webDesignPartner, image: "/imgs/team/victor-chavez.jpg" },
-    { id: 6, name: "Jonathan Gonzales", role: t.renderingPartner, image: "/imgs/team/jonathan-gonzales.jpg" }
+    { id: 1, name: "Nancy Rodríguez", role: t.directorOfAdministration, image: null },
+    { id: 2, name: "Johann López", role: t.directorOfOperations, image: null },
+    { id: 3, name: "Daniela López", role: t.designer, image: null },
+    { id: 4, name: "Claudia Ortiz", role: t.accountingPartner, image: null },
+    { id: 5, name: "Victor Chavez", role: t.webDesignPartner, image: null },
+    { id: 6, name: "Jonathan Gonzales", role: t.renderingPartner, image: null }
   ];
 
   return (
