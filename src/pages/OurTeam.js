@@ -13,7 +13,7 @@ const OurTeamPage = ({ setActiveSection }) => {
     <div className="relative">
       <Hero 
         setActiveSection={setActiveSection}
-        imageSrc="/imgs/team.jpg"
+        imageSrc="/imgs/team.JPG"
         title={t.ourTeam}
         description={t.ourTeamDescription}
         showScrollArrow={true}

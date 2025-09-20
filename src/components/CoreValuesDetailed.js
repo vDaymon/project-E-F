@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import { LuHandshake } from 'react-icons/lu';
 
 const CoreValuesDetailed = () => {
   const { language } = useLanguage();
@@ -22,11 +23,7 @@ const CoreValuesDetailed = () => {
       id: 2,
       title: t.weHonorOurWord,
       description: t.weHonorOurWordDesc,
-      icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      )
+      icon: <LuHandshake className="w-10 h-10 text-blue-600" />
     },
     {
       id: 3,
