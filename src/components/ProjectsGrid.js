@@ -19,10 +19,10 @@ const ProjectsGrid = ({ projects, initialCount = 6 }) => {
       <div className="container mx-auto px-6">
         <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">{t.checkOurProjects}</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 justify-items-center">
           {visibleProjects.map((project, index) => (
-            <div key={project.id || index} className="cursor-pointer group">
-              <div className="w-80 h-60 overflow-hidden rounded-lg mb-3 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
+            <div key={project.id || index} className="cursor-pointer group w-80">
+              <div className="w-full h-60 overflow-hidden rounded-lg mb-3 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                 <img 
                   src={project.image} 
                   alt={project.title}
