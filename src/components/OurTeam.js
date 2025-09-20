@@ -52,7 +52,7 @@ const OurTeam = ({ setActiveSection }) => {
           <div className="bg-gray-50 rounded-2xl p-8">
             <div className="flex flex-col lg:flex-row items-center gap-8">
               <div className="w-full lg:w-1/3">
-                <div className="aspect-square bg-gray-300 rounded-xl overflow-hidden">
+                <div className="aspect-square bg-gray-300 rounded-xl overflow-hidden w-64 h-64 mx-auto">
                   <OptimizedImage 
                     src={executiveLeadership.image} 
                     alt={executiveLeadership.name}
@@ -80,7 +80,7 @@ const OurTeam = ({ setActiveSection }) => {
           viewport={{ once: true }}
         >
           <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">{t.ourTeam}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
@@ -88,19 +88,17 @@ const OurTeam = ({ setActiveSection }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 viewport={{ once: true }}
-                className="group"
+                className="text-center"
               >
-                <div className="bg-gray-50 rounded-xl p-6 text-center hover:bg-gray-100 transition-colors duration-300">
-                  <div className="aspect-square bg-gray-300 rounded-lg overflow-hidden mb-4">
-                    <OptimizedImage 
-                      src={member.image} 
-                      alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">{member.name}</h4>
-                  <p className="text-blue-900 font-medium">{member.role}</p>
+                <div className="aspect-[4/3] w-full overflow-hidden rounded-lg mb-3">
+                  <OptimizedImage 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-1">{member.name}</h4>
+                <p className="text-sm text-blue-900 font-medium">{member.role}</p>
               </motion.div>
             ))}
           </div>

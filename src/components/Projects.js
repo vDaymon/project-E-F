@@ -53,7 +53,7 @@ const Projects = ({ setActiveSection }) => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
@@ -66,20 +66,20 @@ const Projects = ({ setActiveSection }) => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 + idx * 0.1 }}
               viewport={{ once: true }}
-              className="cursor-pointer group"
+              className="cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
-              <div className="mb-4">
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-lg mb-3">
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-64 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-900 transition-colors">
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">
                 {project.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-600">
                 {project.description}
               </p>
             </motion.div>
