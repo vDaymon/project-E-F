@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
-import OptimizedImage from './OptimizedImage';
 
 const ProjectsGrid = ({ projects, initialCount = 6 }) => {
   const { language } = useLanguage();
@@ -22,12 +21,12 @@ const ProjectsGrid = ({ projects, initialCount = 6 }) => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {visibleProjects.map((project, index) => (
-            <div key={project.id || index} className="cursor-pointer">
-              <div className="w-80 h-60 overflow-hidden rounded-lg mb-3">
-                <OptimizedImage 
+            <div key={project.id || index} className="cursor-pointer group">
+              <div className="w-80 h-60 overflow-hidden rounded-lg mb-3 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-1">

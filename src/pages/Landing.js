@@ -9,37 +9,37 @@ const Landing = ({ setActiveSection }) => {
       id: 1,
       title: "Custom Home Building",
       location: "El Retiro, Antioquia",
-      image: "/imgs/projets/customHouseBuilding.jpg"
+      image: "/imgs/projects/customeHouseBuilding.jpg"
     },
     {
       id: 2,
       title: "Bathroom Renovation",
       location: "Envigado, Antioquia",
-      image: "/imgs/projets/bathroomRenovation.jpg"
+      image: "/imgs/projects/bathroomRenovation.jpg"
     },
     {
       id: 3,
       title: "Nespresso Retail Unit",
       location: "El Poblado, Antioquia",
-      image: "/imgs/projets/nespressoRetailUnit.jpg"
+      image: "/imgs/projects/nesspresoRetail.jpg"
     },
     {
       id: 4,
       title: "Nespresso Office Building",
       location: "Chapinero, Bogotá",
-      image: "/imgs/projets/nespressoOfficeBuilding.jpg"
+      image: "/imgs/projects/nesspresoOfice.jpg"
     },
     {
       id: 5,
       title: "Mental Health Center Servid",
       location: "Carmen del Viboral, Antioquia",
-      image: "/imgs/projets/mentalHealthCenterServid.jpg"
+      image: "/imgs/projects/servidEdificio.jpg"
     },
     {
       id: 6,
       title: "Custom Home Building",
       location: "SantaFé de Antioquia, Antioquia",
-      image: "/imgs/projets/customHomeBuilding2.jpg"
+      image: "/imgs/projects/customhousebuilding2.jpg"
     }
   ];
 
