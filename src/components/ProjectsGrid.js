@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
+import ProjectDetail from './ProjectDetail';
 
 const ProjectsGrid = ({ projects, initialCount = 6 }) => {
   const { language } = useLanguage();
   const t = translations[language];
   const [visibleCount, setVisibleCount] = useState(initialCount);
+  const [selectedProject, setSelectedProject] = useState(null);
   
   const visibleProjects = projects.slice(0, visibleCount);
   const hasMore = visibleCount < projects.length;
@@ -21,7 +23,19 @@ const ProjectsGrid = ({ projects, initialCount = 6 }) => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 justify-items-center">
           {visibleProjects.map((project, index) => (
-            <div key={project.id || index} className="cursor-pointer group w-80">
+            <div
+              key={project.id || index}
+              className="cursor-pointer group w-80 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-lg"
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelectedProject(project)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
+            >
               <div className="w-full h-60 overflow-hidden rounded-lg mb-3 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl">
                 <img 
                   src={project.image} 
@@ -32,9 +46,11 @@ const ProjectsGrid = ({ projects, initialCount = 6 }) => {
               <h3 className="text-lg font-semibold text-gray-900 mb-1">
                 {project.title}
               </h3>
-              <p className="text-sm text-gray-600">
-                {project.location}
-              </p>
+              {project.location && (
+                <p className="text-sm text-gray-600">
+                  {project.location}
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -50,6 +66,11 @@ const ProjectsGrid = ({ projects, initialCount = 6 }) => {
           </div>
         )}
       </div>
+
+      <ProjectDetail 
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 };

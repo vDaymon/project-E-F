@@ -12,11 +12,8 @@ const ScheduleConsultation = ({ setActiveSection }) => {
   return (
     <section className="py-16 bg-gray-300">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h2 className="text-4xl font-bold text-gray-900">{t.scheduleTitle}</h2>
-          </div>
-          
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">{t.scheduleTitle}</h2>
           <div>
             <button
               onClick={handleContactClick}

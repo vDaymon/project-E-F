@@ -20,13 +20,30 @@ const ServicesPage = ({ setActiveSection }) => {
     setActiveSection('contacto');
   };
 
+  // Insert a line break after the word 'construcción' (ES) or 'construction' (EN)
+  const subtitle = t.servicesSubtitle || '';
+  const splitRegex = /(construcci[oó]n|construction)/i;
+  let descriptionNode = subtitle;
+  if (splitRegex.test(subtitle)) {
+    const parts = subtitle.split(splitRegex);
+    // parts => [before, matchedWord, after]
+    descriptionNode = (
+      <>
+        {parts[0]}
+        {parts[1]}
+        <br />
+        {parts.slice(2).join('')}
+      </>
+    );
+  }
+
   return (
     <div className="relative">
       <Hero 
         setActiveSection={setActiveSection}
         imageSrc="/imgs/fondoservices.jpg"
         title={t.servicesTitle}
-        description={t.servicesSubtitle}
+        description={descriptionNode}
         showScrollArrow={true}
         sectionId="servicios"
       />
