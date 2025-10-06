@@ -232,6 +232,16 @@ export const translations = {
     message: "Mensaje",
     messagePlaceholder: "Cuéntanos sobre tu proyecto...",
     submit: "Enviar"
+    ,
+    // Contact form messages
+    contactSendSuccess: "Mensaje enviado. Nos pondremos en contacto pronto.",
+    contactSendError: "Error al enviar el mensaje. Por favor intenta nuevamente más tarde.",
+    formValidationError: "Por favor corrige los errores en el formulario.",
+    fullNameRequired: "El nombre es requerido",
+    emailInvalid: "Por favor ingresa un correo válido",
+    phoneRequired: "El número de teléfono es requerido",
+    messageRequired: "El mensaje es requerido",
+    sending: "Enviando..."
   },
   
   en: {

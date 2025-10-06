@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations/translations';
-import { LuHandshake } from 'react-icons/lu';
+// Using an image from Google Drive for the 'Honramos Nuestra Palabra' icon
 
 const CoreValuesDetailed = () => {
   const { language } = useLanguage();
@@ -13,26 +13,50 @@ const CoreValuesDetailed = () => {
       title: t.weBuildWithPurpose,
       description: t.weBuildWithPurposeDesc,
       icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2v20M12 2l4 4-4 4-4-4" />
-        </svg>
+        <img
+          src="/imgs/iconos/monstaña.png"
+          alt={t.weBuildWithPurpose}
+          className="w-full h-full object-contain rounded-full"
+          onError={(e) => {
+            console.warn('monstaña.png not found in /imgs/iconos; falling back to logoblanco.png');
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/imgs/logoblanco.png';
+          }}
+        />
       )
     },
     {
       id: 2,
       title: t.weHonorOurWord,
       description: t.weHonorOurWordDesc,
-      icon: <LuHandshake className="w-10 h-10 text-blue-600" />
+      icon: (
+        <img
+          src="/imgs/iconos/manos.png"
+          alt={t.weHonorOurWord}
+          className="w-full h-full object-contain rounded-full"
+          onError={(e) => {
+            console.warn('manos.png not found in /imgs/iconos; falling back to logoblanco.png');
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/imgs/logoblanco.png';
+          }}
+        />
+      )
     },
     {
       id: 3,
       title: t.weCareForPeople,
       description: t.weCareForPeopleDesc,
       icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
+        <img
+          src="/imgs/iconos/sostener.png"
+          alt={t.weCareForPeople}
+          className="w-full h-full object-contain rounded-full"
+          onError={(e) => {
+            console.warn('sostener.png not found in /imgs/iconos; falling back to logoblanco.png');
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/imgs/logoblanco.png';
+          }}
+        />
       )
     },
     {
@@ -40,9 +64,16 @@ const CoreValuesDetailed = () => {
       title: t.wePushBoundaries,
       description: t.wePushBoundariesDesc,
       icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
+        <img
+          src="/imgs/iconos/cerca.png"
+          alt={t.wePushBoundaries}
+          className="w-full h-full object-contain rounded-full"
+          onError={(e) => {
+            console.warn('cerca.png not found in /imgs/iconos; falling back to logoblanco.png');
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/imgs/logoblanco.png';
+          }}
+        />
       )
     }
   ];
@@ -56,10 +87,10 @@ const CoreValuesDetailed = () => {
           {values.map((value) => (
             <div key={value.id} className="flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-                  {value.icon}
+                  <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center p-2">
+                    {value.icon}
+                  </div>
                 </div>
-              </div>
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {value.title}
