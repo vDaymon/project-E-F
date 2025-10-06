@@ -12,8 +12,9 @@ const ServicesPage = ({ setActiveSection }) => {
   const t = translations[language];
   
   const handleTakeALook = (service) => {
-    // Aquí puedes agregar lógica para mostrar más detalles del servicio
-    console.log(`Take a look at ${service}`);
+    // Navigate to Our Work page and optionally log the action
+    setActiveSection('ourwork');
+    console.log(`Navigating to Our Work from service: ${service}`);
   };
 
   const handleContactUs = () => {
